@@ -2,6 +2,7 @@ package service.menu;
 
 import com.elseveremirli.bean.Config;
 import com.elseveremirli.bean.Student;
+import com.elseveremirli.util.FileUtility;
 import service.inter.MenuAddStudentServiceInter;
 
 import java.util.Scanner;
@@ -22,6 +23,8 @@ public class MenuAddStudentService implements MenuAddStudentServiceInter {
 
         Config.instance().appendStudent(student);
         System.out.println("added student");
+
+        Config.save();
 
     }
 }

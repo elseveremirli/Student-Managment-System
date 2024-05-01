@@ -1,5 +1,7 @@
 package com.elseveremirli.bean;
 
+import com.elseveremirli.util.FileUtility;
+
 import java.io.Serializable;
 
 public class Config implements Serializable {
@@ -25,6 +27,15 @@ public class Config implements Serializable {
         Config.loggedIn = loggedIn;
     }
 
+    public static void initialize() {
+        Object obj = FileUtility.readFileDeserialize("app.obj");
+        if (obj != null) {
+            return;
+        }
+        if(obj instanceof Config){
+            config = (Config) obj;
+        }
+    }
 
 
     public Teacher[] getTeachers() {
@@ -65,6 +76,10 @@ public class Config implements Serializable {
            config = new Config();
        }
        return config;
+    }
+
+    public static void save(){
+        FileUtility.writeObjectToFile(Config.instance(),"app.obj");
     }
 
 }
